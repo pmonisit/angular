@@ -1,1 +1,27 @@
-<p>book-item works!</p>
+<!-- <h1>Available Book</h1>
+<h2>Book name: {{book?.name}}</h2>
+<h2>Authors: {{book?.authors}}</h2>  <br><br> -->
+<!-- <button (click)="sendAction()">Send</button> -->
+
+<div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>BOOK</th>
+            <th>AUTHORS</th>
+            <th>ISBN</th>
+            <th>ACTIONS</th>
+        </tr>
+        <tr>
+          <td>{{book?.id}}</td>
+          <td>{{book?.name}}</td>
+          <td>{{book?.authors}}</td>
+          <td>{{book?.isbn}}</td>
+          <td>
+            <button style="margin-right: 10px;" (click)="editAction()">Edit</button>
+            <button  >Delete</button></td>
+        </tr>
+      </table>
+</div>
+
+<!-- *ngFor="let data of books" -->
