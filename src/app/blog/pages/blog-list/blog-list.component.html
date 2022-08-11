@@ -1,1 +1,4 @@
-<p>blog-list works!</p>
+<h1 style="text-align: center;">BLOG TABLE</h1>
+<div *ngFor="let data of blogs">
+    <app-blog-item [blog]="data"></app-blog-item>
+</div>

@@ -1,1 +1,22 @@
-<p>blog-item works!</p>
+<div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>TITLE</th>
+            <th>DESCRIPTION</th>
+            <th>AUTHOR</th>
+            <th>COMMENTS</th>
+            <th>ACTIONS</th>
+        </tr>
+        <tr>
+          <td>{{blog?.id}}</td>
+          <td>{{blog?.title}}</td>
+          <td>{{blog?.description}}</td>
+          <td>{{blog?.author}}</td>
+          <td>{{blog?.comments}}</td>
+          <td>
+            <button style="margin-right: 10px;">Edit</button>
+            <button >Delete</button></td>
+        </tr>
+      </table>
+</div>
