@@ -8,14 +8,14 @@ export class BookService {
    books: Book[] = [
     {
       id: 1, 
-      name: "Book1", 
-      authors: ["John Doe"],
+      name: "The Lion, the Witch, and the Wardrobe", 
+      authors: ["C.S. Lewis"],
       isbn: "123456789X"
     },
     {
       id: 2, 
-      name: "Book2", 
-      authors: ["Jane Doe"],
+      name: "To Kill a Mockingbird", 
+      authors: ["Harper Lee"],
       isbn: "987654321X"
     }
   ]
