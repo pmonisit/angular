@@ -20,8 +20,8 @@ export class BookItemComponent implements OnInit {
     this.actionEmitter.emit(this.book)
   }
 
-  // deleteAction() {
-  //   this.actionEmitter.emit(this.book)
-  // }
+  deleteAction() {
+    this.actionEmitter.emit(this.book)
+  }
 
 }

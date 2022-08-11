@@ -8,7 +8,7 @@ import { BlogService } from '../../services/blog.service';
   styleUrls: ['./blog-list.component.scss']
 })
 export class BlogListComponent implements OnInit {
-
+  blogId: Blog | undefined;
   public blogs: Blog[] = []
   constructor(private blogService: BlogService) { }
 
@@ -16,4 +16,12 @@ export class BlogListComponent implements OnInit {
     this.blogs = this.blogService.getBlogs()
   }
 
+  editAction(blog: Blog){
+    this.blogId = blog;
+    console.log(this.blogId.id)
+  }
+  deleteAction(book: Blog){
+    this.blogId = book;
+    console.log(this.blogId.id)
+  }
 }

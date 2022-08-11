@@ -15,8 +15,8 @@
           <td>{{blog?.author}}</td>
           <td>{{blog?.comments}}</td>
           <td>
-            <button style="margin-right: 10px;">Edit</button>
-            <button >Delete</button></td>
+            <button style="margin-right: 10px;" (click)="editAction()">Edit</button>
+            <button (click)="deleteAction()">Delete</button></td>
         </tr>
       </table>
 </div>

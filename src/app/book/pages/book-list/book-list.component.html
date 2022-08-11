@@ -1,4 +1,4 @@
 <h1 style="text-align: center;">BOOK TABLE</h1>
 <div *ngFor="let data of books">
-    <app-book-item [book]="data"></app-book-item>
+    <app-book-item [book]="data" (actionEmitter)="editAction($event)"></app-book-item>
 </div>

@@ -8,6 +8,7 @@ import { BookService } from '../../services/book.service';
   styleUrls: ['./book-list.component.scss']
 })
 export class BookListComponent implements OnInit {
+  bookId: Book | undefined;
 
   public books: Book[] = []
   constructor(private bookService: BookService) { }
@@ -16,11 +17,13 @@ export class BookListComponent implements OnInit {
     this.books = this.bookService.getBooks()
   }
 
-  editAction(book: BookService){
-    console.log(book)
+  editAction(book: Book){
+    this.bookId = book;
+    console.log(this.bookId.id)
   }
-  // deleteAction(book: BookService){
-  //   console.log(book)
-  // }
+  deleteAction(book: Book){
+    this.bookId = book;
+    console.log(this.bookId.id)
+  }
 
 }
