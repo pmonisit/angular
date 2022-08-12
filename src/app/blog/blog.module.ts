@@ -7,6 +7,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatButtonModule} from '@angular/material/button';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'shared.module';
+
 
 @NgModule({
   declarations: [
@@ -14,12 +17,14 @@ import {MatButtonModule} from '@angular/material/button';
     BlogItemComponent
   ],
   imports: [
+    SharedModule,
     CommonModule,
     BlogRoutingModule,
     MatCardModule,
     MatDividerModule,
     MatGridListModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule
   ]
 })
 export class BlogModule { }

@@ -1,16 +1,22 @@
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 50%;
+.example-card {
+  width: 500px;
+  height: 1000px;
+  margin: 50px;
+}
+section {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+  justify-content: center;
+
+  .app-blog {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
   }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 10px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #b3b3f9;
-  }
- 
+}
+h1 {
+  text-align: center;
+  margin: 10px;
+  margin-top: 20px;
+}

@@ -1,1 +1,31 @@
-<p>header works!</p>
+<mat-toolbar>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/profile']">
+          <mat-icon>perm_identity</mat-icon>
+          <span>Profile</span>
+        </button>
+        <button mat-menu-item [routerLink]="['/blog']">
+          <mat-icon>movie</mat-icon>
+          <span>Blogs</span>
+        </button>
+        <button mat-menu-item [routerLink]="['/book']">
+          <mat-icon>library_books</mat-icon>
+          <span>Books</span>
+        </button>
+      </mat-menu>
+    <span>Prince Andwill</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon" [routerLink]="['/profile']">
+        <mat-icon>perm_identity</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon"  [routerLink]="['/blog']">
+        <mat-icon>movie</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" [routerLink]="['/book']">
+        <mat-icon>library_books</mat-icon>
+    </button>
+</mat-toolbar>
+  

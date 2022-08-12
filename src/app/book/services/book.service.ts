@@ -5,6 +5,9 @@ import { Book } from '../models/book';
   providedIn: 'root'
 })
 export class BookService {
+  delete(id: number | undefined) {
+    throw new Error('Method not implemented.');
+  }
    books: Book[] = [
     {
       id: 1, 
@@ -17,6 +20,12 @@ export class BookService {
       name: "To Kill a Mockingbird", 
       authors: ["Harper Lee"],
       isbn: "987654321X"
+    },
+    {
+      id: 3, 
+      name: "The Crossing", 
+      authors: ["Michael Doane"],
+      isbn: "7593657396"
     }
   ]
   constructor() { }

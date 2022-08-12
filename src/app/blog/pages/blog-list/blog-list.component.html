@@ -1,4 +1,7 @@
-<h1 style="text-align: center;">BLOGS</h1>
-<div *ngFor="let data of blogs">
-    <app-blog-item [blog]="data" (actionEmitter)="editAction($event)"></app-blog-item>
-</div>
+<app-command-bar></app-command-bar>
+<h1>Blogs</h1>
+<section>
+    <div *ngFor="let data of blogs" class="example-card">
+        <app-blog-item [blog]="data" class="app-blog" (actionEmitter)="editAction($event)"></app-blog-item>
+    </div>
+</section>

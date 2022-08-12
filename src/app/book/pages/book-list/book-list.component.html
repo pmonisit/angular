@@ -1,4 +1,7 @@
-<h1 style="text-align: center;">BOOKS</h1>
-<div *ngFor="let data of books">
-    <app-book-item [book]="data" (actionEmitter)="editAction($event)"></app-book-item>
-</div>
+<app-command-bar></app-command-bar>
+<h1>Available Books</h1>
+<section>
+    <div *ngFor="let data of books" class="example-card">
+        <app-book-item [book]="data" class="app-book" (actionEmitter)="editAction($event)"></app-book-item>
+    </div>
+</section>
