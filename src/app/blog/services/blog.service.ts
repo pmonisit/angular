@@ -34,4 +34,20 @@ export class BlogService {
   getBlogs(): Blog[] {
     return this.blogs;
   }
+
+  setBlog(dt: Blog) {
+    this.blogs.push(dt)
+  }
+
+  editBlog(dt: Blog){
+    for(let data of this.blogs){
+      if(data.id === dt.id){
+        data.title = dt.title
+        data.description = dt.description
+        data.author = dt.author
+        data.comments = dt.comments
+      }
+    }
+  }
 }
+

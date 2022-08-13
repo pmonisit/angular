@@ -2,6 +2,6 @@
 <h1>Blogs</h1>
 <section>
     <div *ngFor="let data of blogs" class="example-card">
-        <app-blog-item [blog]="data" class="app-blog" (actionEmitter)="editAction($event)"></app-blog-item>
+        <app-blog-item [blog]="data" class="app-blog" (actionEmitter)="actionButtons($event)"></app-blog-item>
     </div>
 </section>

@@ -9,12 +9,15 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatButtonModule} from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'shared.module';
-
+import { BlogFormComponent } from './pages/blog-form/blog-form.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
     BlogListComponent,
-    BlogItemComponent
+    BlogItemComponent,
+    BlogFormComponent
   ],
   imports: [
     SharedModule,
@@ -24,7 +27,9 @@ import { SharedModule } from 'shared.module';
     MatDividerModule,
     MatGridListModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule,
+    MatInputModule  
   ]
 })
 export class BlogModule { }

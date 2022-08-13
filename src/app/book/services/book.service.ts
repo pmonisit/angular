@@ -5,9 +5,7 @@ import { Book } from '../models/book';
   providedIn: 'root'
 })
 export class BookService {
-  delete(id: number | undefined) {
-    throw new Error('Method not implemented.');
-  }
+  
    books: Book[] = [
     {
       id: 1, 
@@ -34,4 +32,18 @@ export class BookService {
     return this.books;
   }
 
+  setBook(dt: Book) {
+    this.books.push(dt)
+  }
+
+  editBook(dt: Book){
+    for(let data of this.books){
+      if(data.id === dt.id){
+        data.name = dt.name
+        data.isbn = dt.isbn
+        data.authors = dt.authors
+      }
+    }
+  }
+           
 }

@@ -15,7 +15,7 @@ const routes: Routes = [
     
   },
   {
-    path: 'form/id',
+    path: 'form/:id',
     component: BookFormComponent,
     
   }

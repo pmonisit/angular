@@ -23,4 +23,5 @@ export class BlogItemComponent implements OnInit {
     this.actionEmitter.emit(this.blog)
   }
 
+  
 }

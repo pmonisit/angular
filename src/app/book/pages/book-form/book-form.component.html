@@ -8,7 +8,7 @@
         <mat-card-content>
             <form class="example-form" [formGroup]="bookForm" (ngSubmit)="submit()">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Name</mat-label>
+                  <mat-label>Book Name</mat-label>
                   <input matInput formControlName="name" id="name">
                 </mat-form-field><br>
               
@@ -17,13 +17,23 @@
                     <input matInput formControlName="isbn" id="isbn">
                 </mat-form-field><br>
 
-                <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Authors</mat-label>
-                    <input matInput formArrayName="authors" id="authors">
-                </mat-form-field><br>
-               
-                <button mat-raised-button type="submit" class="submitBtn" color="warn">Submit</button>
-                <button mat-raised-button color="primary">Back</button>
+                <ng-container formArrayName="authors">
+                    <div *ngFor="let data of authorArray.controls; index as i"> 
+                        <mat-form-field class="example-full-width" appearance="outline" >
+                        <mat-label>Author Name</mat-label>
+                            <input matInput [formControlName]="i">     
+                            <button mat-mini-fab id="author-delete" color="warn" (click)="deleteAuthor(i)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </mat-form-field>   
+                    </div>
+                      <button type="button" mat-stroked-button color="warn" id="add-author" (click)="addAuthor()">Add Author</button><br><br> 
+                </ng-container>
+
+                <div id="submit-btn" >
+                    <button mat-raised-button type="submit" class="submitBtn" color="warn">Submit</button>
+                    <button mat-raised-button color="primary" [routerLink]="['/book']">Back</button>
+                </div>             
               </form>
         </mat-card-content>
     </mat-card>

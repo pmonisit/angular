@@ -1,0 +1,45 @@
+<div id="blog-form">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                Blog Form
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="example-form" [formGroup]="blogForm" (ngSubmit)="submit()">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Title</mat-label>
+                  <input matInput formControlName="title" id="title">
+                </mat-form-field><br>
+              
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput formControlName="description" id="description" rows="7"></textarea>
+                  </mat-form-field><br>
+
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Author</mat-label>
+                    <input matInput formControlName="author" id="author">
+                </mat-form-field><br>
+
+                <ng-container formArrayName="comments">
+                    <div *ngFor="let data of commentsArray.controls; index as i"> 
+                        <mat-form-field class="example-full-width" appearance="outline" >
+                        <mat-label>Add your comment</mat-label>
+                            <input matInput [formControlName]="i">     
+                            <button mat-mini-fab id="comment-delete" color="warn" (click)="deleteComment(i)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </mat-form-field>   
+                    </div>
+                      <button type="button" mat-stroked-button color="warn" id="add-comment" (click)="addComment()">Add Comment</button><br><br> 
+                </ng-container>
+
+                <div id="submit-btn" >
+                    <button mat-raised-button type="submit" class="submitBtn" color="warn">Submit</button>
+                    <button mat-raised-button color="primary" [routerLink]="['/blog']">Back</button>
+                </div>             
+              </form>
+        </mat-card-content>
+    </mat-card>
+</div>

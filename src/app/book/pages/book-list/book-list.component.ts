@@ -10,8 +10,8 @@ import { BookService } from '../../services/book.service';
 })
 export class BookListComponent implements OnInit {
   bookId: Book | undefined;
-
   public books: Book[] = []
+
   constructor(private bookService: BookService, private router: Router) { }
 
   ngOnInit(): void {
@@ -23,17 +23,14 @@ export class BookListComponent implements OnInit {
     console.log(this.bookId.id)
   }
 
-  editAction(book: Book){
+  actionButtons (book: Book){
     this.bookId = book;
     console.log(this.bookId.id)
   }
-  // deleteAction(book: Book){
-  //   this.bookId = book;
-  //   console.log(this.bookId.id)
-  // }
+  
+  commandBarButtons(){
+    this.router.navigate(['form', 2])
+  }
 
-  // commandBar(){
-  //   this.router.navigate(['/form', 2])
-  // }
 
 }

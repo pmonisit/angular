@@ -13,8 +13,9 @@ export class CommandBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  commandBarButton () {
-    this.router.navigate
+  commandBarButtons () {
+    var Commandbuttons: string[] = this.router.url.split('/');
+    return Commandbuttons[1];
   }
 
 }
