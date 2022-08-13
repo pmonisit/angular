@@ -12,7 +12,7 @@ export class BookListComponent implements OnInit {
   bookId: Book | undefined;
   public books: Book[] = []
 
-  constructor(private bookService: BookService, private router: Router) { }
+  constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
     this.books = this.bookService.getBooks()
@@ -27,10 +27,4 @@ export class BookListComponent implements OnInit {
     this.bookId = book;
     console.log(this.bookId.id)
   }
-  
-  commandBarButtons(){
-    this.router.navigate(['form', 2])
-  }
-
-
 }

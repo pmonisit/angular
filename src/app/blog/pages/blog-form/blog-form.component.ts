@@ -18,7 +18,7 @@ export class BlogFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private routes: ActivatedRoute, private blogs: BlogService) { 
     this.blogId = this.routes.snapshot.paramMap.get('id')
-    if(this.blogId === 'false')
+    if(this.blogId === 'true')
       this.blogData = [{id: 0, title: '', description: '', author: '', comments:['']}]
       else
         this.blogData = this.blogs.getBlogs().filter(blog => blog.id === parseInt(this.blogId))

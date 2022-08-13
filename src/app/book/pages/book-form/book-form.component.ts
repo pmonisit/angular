@@ -19,7 +19,7 @@ export class BookFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private routes: ActivatedRoute, private books: BookService ) {
       this.bookId = this.routes.snapshot.paramMap.get('id')
-      if(this.bookId === 'false')
+      if(this.bookId === 'true')
         this.bookData = [{id: 0, name: '', isbn: '', authors: ['']}]
         else
          this.bookData = this.books.getBooks().filter(book => book.id === parseInt(this.bookId))
