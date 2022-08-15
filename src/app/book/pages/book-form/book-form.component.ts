@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Book } from '../../models/book';
@@ -18,21 +18,24 @@ export class BookFormComponent implements OnInit {
   bookId: any;
 
   constructor(private fb: FormBuilder, private routes: ActivatedRoute, private books: BookService ) {
-      this.bookId = this.routes.snapshot.paramMap.get('id')
-      if(this.bookId === 'true')
+      this.routes.paramMap.subscribe( paramMap => {
+        this.bookId = paramMap.get('id');
+      })
+      if(this.bookId === "true")
         this.bookData = [{id: 0, name: '', isbn: '', authors: ['']}]
         else
-         this.bookData = this.books.getBooks().filter(book => book.id === parseInt(this.bookId))
+        this.bookData = this.books.getBooks().filter(book => book.id === parseInt(this.bookId))
       
-       
       this.bookForm = this.fb.group({
         name: [this.bookData[0].name],
         isbn: [this.bookData[0].isbn],
         authors: this.fb.array([])
       });
+      // this.bookForm.patchValue(this.bookForm)
       this.authorArray = this.bookForm.get('authors') as FormArray
       for(let newData of this.bookData[0].authors)
         this.authorArray.push(new FormControl(newData))
+      
    }
 
   ngOnInit(): void {
@@ -54,5 +57,4 @@ export class BookFormComponent implements OnInit {
     else  
       return this.books.setBook(dt)
   }
-  
 }

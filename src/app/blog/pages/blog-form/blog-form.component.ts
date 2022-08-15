@@ -17,8 +17,10 @@ export class BlogFormComponent implements OnInit {
   blogId: any;
 
   constructor(private fb: FormBuilder, private routes: ActivatedRoute, private blogs: BlogService) { 
-    this.blogId = this.routes.snapshot.paramMap.get('id')
-    if(this.blogId === 'true')
+    this.routes.paramMap.subscribe( paramMap => {
+      this.blogId = paramMap.get('id');
+    })
+    if(this.blogId === "true")
       this.blogData = [{id: 0, title: '', description: '', author: '', comments:['']}]
       else
         this.blogData = this.blogs.getBlogs().filter(blog => blog.id === parseInt(this.blogId))
@@ -28,6 +30,7 @@ export class BlogFormComponent implements OnInit {
       author: [this.blogData[0].author],
       comments: this.fb.array([])
     });
+    // this.blogForm.patchValue(this.blogForm)
     this.commentsArray = this.blogForm.get('comments') as FormArray
     for(let newData of this.blogData[0].comments)
       this.commentsArray.push(new FormControl(newData))
