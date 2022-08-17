@@ -16,12 +16,19 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { BookModule } from './book/book.module';
 import { MatInputModule } from '@angular/material/input';
+import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/components/home/home.component';
+import { SignupUpPageComponent } from './components/signup-up-page/signup-up-page.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    HomeComponent,
+    SignupUpPageComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +46,7 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     BookModule,
     MatInputModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

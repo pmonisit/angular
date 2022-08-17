@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { forkJoin, map, Subscription } from 'rxjs';
 import { Blog } from '../../models/blog';
 import { BlogService } from '../../services/blog.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blog-list',
@@ -9,20 +11,32 @@ import { BlogService } from '../../services/blog.service';
 })
 export class BlogListComponent implements OnInit {
   blogId: Blog | undefined;
-  public blogs: Blog[] = []
+  blogs: Blog[] = [];
+  updatedBlog: Subscription | undefined;
+  private router: Router | undefined;
 
   constructor(private blogService: BlogService) { }
 
   ngOnInit(): void {
-    this.blogs = this.blogService.getBlogs()
+    // this.blogs = this.blogService.getBlogs()
+    this.blogService.getBlogs().subscribe(blogList => {
+      this.blogs = blogList
+    });
   }
 
-  actionButtons(blog: Blog){
-    this.blogId = blog;
-    console.log(this.blogId.id)
+  deleteBlog(id: any){
+    this.updatedBlog = forkJoin([this.blogService.deleteOne(id), this.blogService.getBlogs()]).pipe(
+    map(([x,y]) => {
+      this.blogs = y
+    })).subscribe()
+     this.router!.navigate(['/blog']);
   }
-  deleteAction(book: Blog){
-    this.blogId = book;
-    console.log(this.blogId.id)
+
+  ngOnDestroy(): void {
+    this.updatedBlog?.unsubscribe()
   }
+  
+  // deleteAllBlogs(blog: Blog){
+  //   this.blogService.deleteAll
+  // }
 }

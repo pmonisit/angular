@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+
 
 @Component({
   selector: 'app-command-bar',
@@ -7,15 +7,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./command-bar.component.scss']
 })
 export class CommandBarComponent implements OnInit {
-
-  constructor(private router: Router) { }
+  @Output() deleteEmitter = new EventEmitter()
+  constructor() { }
 
   ngOnInit(): void {
+    
   }
-
-  commandBarButtons () {
-    var Commandbuttons: string[] = this.router.url.split('/');
-    return Commandbuttons[1];
+  deleteAll() {
+     this.deleteEmitter.emit();
   }
-
+    
 }

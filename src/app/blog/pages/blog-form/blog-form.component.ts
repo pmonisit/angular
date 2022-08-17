@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Blog } from '../../models/blog';
 import { BlogService } from '../../services/blog.service';
 
@@ -9,37 +10,49 @@ import { BlogService } from '../../services/blog.service';
   templateUrl: './blog-form.component.html',
   styleUrls: ['./blog-form.component.scss']
 })
-export class BlogFormComponent implements OnInit {
+export class BlogFormComponent implements OnInit, OnDestroy  {
 
   blogForm: FormGroup;
   commentsArray: FormArray;
   blogData: Blog[] = [];
   blogId: any;
+  updatedBlog: Subscription | undefined;
+  private router: Router | undefined;
+  
+  constructor(private fb: FormBuilder, private routes: ActivatedRoute, private blogService: BlogService) { 
 
-  constructor(private fb: FormBuilder, private routes: ActivatedRoute, private blogs: BlogService) { 
     this.routes.paramMap.subscribe( paramMap => {
-      this.blogId = paramMap.get('id');
+      this.blogId = paramMap.get("id");
     })
-    if(this.blogId === "true")
-      this.blogData = [{id: 0, title: '', description: '', author: '', comments:['']}]
-      else
-        this.blogData = this.blogs.getBlogs().filter(blog => blog.id === parseInt(this.blogId))
+
     this.blogForm = this.fb.group({
-      title: [this.blogData[0].title],
-      description: [this.blogData[0].description],
-      author: [this.blogData[0].author],
+      id: [],
+      title: [''],
+      description: [''],
+      author: [''],
       comments: this.fb.array([])
     });
-    // this.blogForm.patchValue(this.blogForm)
-    this.commentsArray = this.blogForm.get('comments') as FormArray
-    for(let newData of this.blogData[0].comments)
-      this.commentsArray.push(new FormControl(newData))
-    
+   this.commentsArray = this.blogForm.get('comments') as FormArray
+   
+    this.updatedBlog = this.blogService.updateBlog(parseInt(this.blogId)).subscribe(data => {
+      this.blogForm = this.fb.group({
+        id: [data[0].id],
+        title: [data[0].title],
+        description: [data[0].description],
+        author: [data[0].author],
+        comments: this.fb.array([])
+      });
+      this.commentsArray = this.blogForm.get('comments') as FormArray
+      for(let commentsData of data[0].comments){
+        this.commentsArray.push(new FormControl(commentsData))
+      }
+      
+    }) 
   }
 
   ngOnInit(): void {
   }
-
+  
   deleteComment(i: number) {
     this.commentsArray.removeAt(i);
   }
@@ -48,13 +61,19 @@ export class BlogFormComponent implements OnInit {
     this.commentsArray.push(new FormControl(''));
   }
 
-  submit () {
-    console.log(this.blogForm.value)
-    let dt = this.blogForm.getRawValue() as Blog
-    if(this.blogId)
-      return this.blogs.editBlog(dt)
-    else  
-      return this.blogs.setBlog(dt)
+  submit() {
+    console.log(this.blogForm?.value)
+    let dt = this.blogForm.getRawValue() as Blog 
+    if(this.blogId && dt.id !== null)
+       this.blogService.editBlog(dt).subscribe()
+    else
+       this.blogService.createBlog(dt).subscribe() 
+
+    this.router?.navigate(['/blogs'])
   }
 
+  ngOnDestroy(): void {
+   
+    this.updatedBlog!.unsubscribe()
+  }
 }
