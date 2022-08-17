@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Blog } from '../models/blog';
@@ -11,8 +10,6 @@ import { Blog } from '../models/blog';
 })
 export class BlogService {
  
-  public blogForm !: FormGroup
-  
   constructor(private http: HttpClient) { }
 
   createBlog(blog: Blog){

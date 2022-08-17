@@ -1,49 +1,51 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map, Observable, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Book } from '../models/book';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
   
-   books: Book[] = [
-    {
-      id: 1, 
-      name: "The Lion, the Witch, and the Wardrobe", 
-      authors: ["C.S. Lewis"],
-      isbn: "123456789X"
-    },
-    {
-      id: 2, 
-      name: "To Kill a Mockingbird", 
-      authors: ["Harper Lee"],
-      isbn: "987654321X"
-    },
-    {
-      id: 3, 
-      name: "The Crossing", 
-      authors: ["Michael Doane"],
-      isbn: "7593657396"
-    }
-  ]
-  constructor() { }
+   
+  constructor(private http: HttpClient) { }
 
-  getBooks(): Book[] {
-    return this.books;
+  createBook(book: Book){
+    return this.http.post<Book>(`${environment.url}/books`,book).pipe(
+      tap(x => x))
   }
 
-  setBook(dt: Book) {
-    this.books.push(dt)
+  getBooks(): Observable<Book[]> {
+    return this.http.get<Book[]>(`${environment.url}/books`).pipe(tap((book: Book[]) => {
+      return book;
+    }));
   }
 
-  editBook(dt: Book){
-    for(let data of this.books){
-      if(data.id === dt.id){
-        data.name = dt.name
-        data.isbn = dt.isbn
-        data.authors = dt.authors
-      }
-    }
+  updateBook(id: number){
+    return this.http.get<Book[]>(`${environment.url}/books`).pipe(
+      map((blog: Book[]) => {
+        return blog.filter( x => x.id === id)      
+      })
+    )
   }
+
+  editBook(book: Book){
+    return this.http.put<Book>(`${environment.url}/books/${book.id}`, book).pipe(
+      tap(x => x)
+    )
+  }
+
+  deleteOne(id: string){
+    return this.http.delete<Book>(`${environment.url}/books/${id}`).pipe(
+      tap(x => x))
+  }
+
+  deleteAll(){
+    this.http.delete<Book>(`${environment.url}/books/`).pipe(tap(x => x))
+  }
+ 
            
 }
