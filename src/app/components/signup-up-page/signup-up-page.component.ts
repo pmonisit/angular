@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 
 
@@ -15,7 +16,12 @@ export class SignupUpPageComponent implements OnInit {
   hide = true;
   public signUpForm !: FormGroup
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private http: HttpClient, 
+    private router: Router, 
+    public authService: AuthService) 
+    { }
 
   ngOnInit(): void {
     this.signUpForm = this.formBuilder.group({
@@ -26,15 +32,24 @@ export class SignupUpPageComponent implements OnInit {
     })
   }
 
-  signUp(){
-    this.http.post<any>(`${environment.url}/users`,this.signUpForm.value)
-    .subscribe(res=>{
-      alert('Registered successfully');
-      this.signUpForm.reset()
-      this.router.navigate(["login"])
-    },err=>{
-      alert("Something went wrong")
-    })
+  // signUp(){
+  //   this.http.post<any>(`${environment.url}/users`,this.signUpForm.value)
+  //   .subscribe(res=>{
+  //     alert('Registered successfully');
+  //     this.signUpForm.reset()
+  //     this.router.navigate(["login"])
+  //   },err=>{
+  //     alert("Something went wrong")
+  //   })
+  // }
+
+  registerUser() {
+    this.authService.signUp(this.signUpForm.value).subscribe((res) => {
+      if (res.result) {
+        this.signUpForm.reset();
+        this.router.navigate(['login']);
+      }
+    });
   }
 
 }

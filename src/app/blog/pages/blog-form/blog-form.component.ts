@@ -34,6 +34,7 @@ export class BlogFormComponent implements OnInit, OnDestroy  {
     });
    this.commentsArray = this.blogForm.get('comments') as FormArray
    
+   
     this.updatedBlog = this.blogService.updateBlog(parseInt(this.blogId)).subscribe(data => {
       this.blogForm = this.fb.group({
         id: [data[0].id],

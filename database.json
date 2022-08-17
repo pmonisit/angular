@@ -24,45 +24,7 @@
       "description": "",
       "author": "",
       "comments": []
-    },
-    {
-      "id": 2,
-      "title": "",
-      "description": "",
-      "author": "Prince",
-      "comments": []
-    }
-  ],
-  "users": [
-    {
-      "id": 1,
-      "email": "bolu@gmail.com",
-      "password": "1234",
-      "firstname": "sample",
-      "lastname": "data",
-      "bio": "Bio",
-      "active": "Active"
-    },
-    {
-      "email": "admin@mail.com",
-      "password": "1234",
-      "firstname": "Prince Andwill",
-      "lastname": "Monisit",
-      "id": 2
-    },
-    {
-      "email": "",
-      "password": "",
-      "firstname": "",
-      "lastname": "",
-      "id": 3
-    },
-    {
-      "email": "",
-      "password": "",
-      "firstname": "",
-      "lastname": "",
-      "id": 4
     }
   ]
+  
 }

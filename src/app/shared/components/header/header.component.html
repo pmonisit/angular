@@ -21,11 +21,30 @@
     <button mat-icon-button class="example-icon" [routerLink]="['/profile']">
         <mat-icon>perm_identity</mat-icon>
     </button>
+
     <button mat-icon-button class="example-icon"  [routerLink]="['/blog']">
         <mat-icon>movie</mat-icon>
     </button>
+
     <button mat-icon-button class="example-icon" [routerLink]="['/book']">
         <mat-icon>library_books</mat-icon>
+    </button>
+
+    <button mat-icon-button *ngIf="!this.authService.isLoggedIn" class="example-icon"  
+    routerLinkActive="active" routerLink="/login">
+      <!-- <mat-icon>movie</mat-icon> -->
+      Login
+    </button>
+
+    <button mat-icon-button (click)="logout()" *ngIf="this.authService.isLoggedIn" class="example-icon"  [routerLink]="['/blog']">
+      <!-- <mat-icon>movie</mat-icon> -->
+      Logout
+    </button>
+
+    <button mat-icon-button *ngIf="!this.authService.isLoggedIn" class="example-icon" routerLinkActive="active"
+    routerLinkActive="active" routerLink="/signup">
+        <!-- <mat-icon>library_books</mat-icon> -->
+        Register
     </button>
 </mat-toolbar>
   
