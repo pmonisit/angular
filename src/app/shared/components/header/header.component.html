@@ -1,5 +1,6 @@
 <mat-toolbar>
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="this.authService.isLoggedIn" class="example-icon"  
+    routerLinkActive="active" aria-label="Example icon-button with a menu">
         <mat-icon>menu</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
@@ -16,35 +17,38 @@
           <span>Books</span>
         </button>
       </mat-menu>
-    <span>Prince Andwill</span>
+    <span>Simple CRUD</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon" [routerLink]="['/profile']">
+    <button mat-icon-button class="example-icon" *ngIf="this.authService.isLoggedIn" class="example-icon"  
+    routerLinkActive="active" [routerLink]="['/profile']">
         <mat-icon>perm_identity</mat-icon>
     </button>
 
-    <button mat-icon-button class="example-icon"  [routerLink]="['/blog']">
+    <button mat-icon-button class="example-icon" *ngIf="this.authService.isLoggedIn" class="example-icon"  
+    routerLinkActive="active"  [routerLink]="['/blog']">
         <mat-icon>movie</mat-icon>
     </button>
 
-    <button mat-icon-button class="example-icon" [routerLink]="['/book']">
+    <button mat-icon-button class="example-icon" *ngIf="this.authService.isLoggedIn" class="example-icon"  
+    routerLinkActive="active" [routerLink]="['/book']">
         <mat-icon>library_books</mat-icon>
     </button>
 
-    <button mat-icon-button *ngIf="!this.authService.isLoggedIn" class="example-icon"  
+    <button mat-raised-button *ngIf="!this.authService.isLoggedIn" class="example-icon"  
     routerLinkActive="active" routerLink="/login">
       <!-- <mat-icon>movie</mat-icon> -->
       Login
     </button>
 
-    <button mat-icon-button (click)="logout()" *ngIf="this.authService.isLoggedIn" class="example-icon"  [routerLink]="['/blog']">
+    <button mat-raised-button (click)="logout()" *ngIf="this.authService.isLoggedIn" class="example-icon"  [routerLink]="['/blog']">
       <!-- <mat-icon>movie</mat-icon> -->
       Logout
     </button>
 
-    <button mat-icon-button *ngIf="!this.authService.isLoggedIn" class="example-icon" routerLinkActive="active"
+    <button mat-raised-button *ngIf="!this.authService.isLoggedIn" class="example-icon" routerLinkActive="active"
     routerLinkActive="active" routerLink="/signup">
         <!-- <mat-icon>library_books</mat-icon> -->
-        Register
+      Register
     </button>
 </mat-toolbar>
   

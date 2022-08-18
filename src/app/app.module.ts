@@ -21,6 +21,8 @@ import { HomeComponent } from './home/components/home/home.component';
 import { SignupUpPageComponent } from './components/signup-up-page/signup-up-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { HeaderInterceptor } from './core/interceptors/header.interceptor';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -47,7 +49,13 @@ import { HeaderInterceptor } from './core/interceptors/header.interceptor';
     ReactiveFormsModule,
     BookModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [
     {

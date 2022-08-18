@@ -10,6 +10,8 @@ import { User } from 'src/app/user/models/user';
 })
 export class AuthService {
 
+  // https://jcp-outfit.herokuapp.com/api/users
+  // http://localhost:8000/auth
   endpoint: string = 'https://jcp-outfit.herokuapp.com/api/users';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
@@ -25,7 +27,7 @@ export class AuthService {
   // Sign-in
   signIn(user: User) {
     return this.http
-      .post<any>(`${this.endpoint}/login`, user)
+      .post<any>(`http://localhost:8000/auth/login`, user)
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res.token);
         this.getUserProfile(res._id).subscribe((res) => {

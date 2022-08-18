@@ -13,10 +13,6 @@ const routes: Routes = [
     pathMatch: "full"
   },
   {
-    path: "home",
-    component: HomeComponent
-  },
-  {
     path: "signup",
     component: SignupUpPageComponent
   },
@@ -26,18 +22,21 @@ const routes: Routes = [
   },
   {
     path: "book",
-    loadChildren: () => import("./book/book.module").then(m => m.BookModule)
+    loadChildren: () => import("./book/book.module").then(m => m.BookModule),
+    canActivate: [AuthGuard] 
   },
   {
     path: "blog",
-    loadChildren: () => import("./blog/blog.module").then(m => m.BlogModule)
+    loadChildren: () => import("./blog/blog.module").then(m => m.BlogModule),
+    canActivate: [AuthGuard] 
   },
   {
     path: "profile",
-    loadChildren: () => import("./user/user.module").then(m => m.UserModule)
+    loadChildren: () => import("./user/user.module").then(m => m.UserModule),
+    canActivate: [AuthGuard] 
   },
   { 
-    path: 'users/:id', 
+    path: 'home', 
     component: HomeComponent, 
     canActivate: [AuthGuard] 
   }
