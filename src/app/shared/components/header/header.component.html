@@ -19,17 +19,17 @@
       </mat-menu>
     <span>Simple CRUD</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon" *ngIf="this.authService.isLoggedIn" class="example-icon"  
+    <button mat-icon-button *ngIf="this.authService.isLoggedIn" class="example-icon"  
     routerLinkActive="active" [routerLink]="['/profile']">
         <mat-icon>perm_identity</mat-icon>
     </button>
 
-    <button mat-icon-button class="example-icon" *ngIf="this.authService.isLoggedIn" class="example-icon"  
+    <button mat-icon-button *ngIf="this.authService.isLoggedIn" class="example-icon"  
     routerLinkActive="active"  [routerLink]="['/blog']">
         <mat-icon>movie</mat-icon>
     </button>
 
-    <button mat-icon-button class="example-icon" *ngIf="this.authService.isLoggedIn" class="example-icon"  
+    <button mat-icon-button *ngIf="this.authService.isLoggedIn" class="example-icon"  
     routerLinkActive="active" [routerLink]="['/book']">
         <mat-icon>library_books</mat-icon>
     </button>

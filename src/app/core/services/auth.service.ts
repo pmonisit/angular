@@ -10,8 +10,12 @@ import { User } from 'src/app/user/models/user';
 })
 export class AuthService {
 
+
   // https://jcp-outfit.herokuapp.com/api/users
+  // https://angular-api-monisit.herokuapp.com/
   // http://localhost:8000/auth
+  // http://localhost:4001/api/users
+  // https://angular-api-monisit.herokuapp.com/api/users
   endpoint: string = 'https://jcp-outfit.herokuapp.com/api/users';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
@@ -21,20 +25,21 @@ export class AuthService {
   // Sign-up
   signUp(user: User): Observable<any> {
     let api = `${this.endpoint}/register`;
-    return this.http.post(api, user).pipe(catchError(this.handleError));
+    return this.http.post(api, user).pipe( catchError(this.handleError));
     
   }
   // Sign-in
   signIn(user: User) {
     return this.http
-      .post<any>(`http://localhost:8000/auth/login`, user)
+      .post<any>(`${this.endpoint}/login`, user)
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res.token);
         this.getUserProfile(res._id).subscribe((res) => {
           this.currentUser = res;
-          this.router.navigate(['home' + res.msg._id]);
+          this.router.navigate(['/blog']);
         });
       });
+      
   }
   getToken() {
     return localStorage.getItem('access_token');
@@ -50,7 +55,7 @@ export class AuthService {
     }
   }
   // User profile
-  getUserProfile(id: any): Observable<any> {
+  getUserProfile(id: User): Observable<any> {
     let api = `${this.endpoint}/${id}`;
     return this.http.get(api, { headers: this.headers }).pipe(
       map((res) => {
