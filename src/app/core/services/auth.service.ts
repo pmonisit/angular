@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { User } from 'src/app/user/models/user';
 
 
@@ -10,37 +10,31 @@ import { User } from 'src/app/user/models/user';
 })
 export class AuthService {
 
-
-  // https://jcp-outfit.herokuapp.com/api/users
-  // https://angular-api-monisit.herokuapp.com/
-  // http://localhost:8000/auth
-  // http://localhost:4001/api/users
-  // https://angular-api-monisit.herokuapp.com/api/users
-  endpoint: string = 'https://jcp-outfit.herokuapp.com/api/users';
+  endpoint: string = 'http://localhost:3000';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
 
   constructor(private http: HttpClient, public router: Router) { }
 
-  // Sign-up
   signUp(user: User): Observable<any> {
     let api = `${this.endpoint}/register`;
-    return this.http.post(api, user).pipe( catchError(this.handleError));
+    return this.http.post(api, user).pipe(
+    tap(()=> {
+      alert("Registered successfully. You may now login")
+      this.router.navigate(['/login'])
+    }));
     
   }
-  // Sign-in
+  
   signIn(user: User) {
     return this.http
-      .post<any>(`${this.endpoint}/login`, user)
+      .post(`${this.endpoint}/signin`, user)
       .subscribe((res: any) => {
-        localStorage.setItem('access_token', res.token);
-        this.getUserProfile(res._id).subscribe((res) => {
-          this.currentUser = res;
-          this.router.navigate(['/blog']);
-        });
-      });
-      
+        localStorage.setItem('access_token', res.accessToken);
+        this.router.navigate(['/home']);
+      });  
   }
+
   getToken() {
     return localStorage.getItem('access_token');
   }
@@ -54,27 +48,27 @@ export class AuthService {
       this.router.navigate(['login']);
     }
   }
-  // User profile
-  getUserProfile(id: User): Observable<any> {
-    let api = `${this.endpoint}/${id}`;
-    return this.http.get(api, { headers: this.headers }).pipe(
-      map((res) => {
-        return res || {};
-      }),
-      catchError(this.handleError)
-    );
-  }
-  // Error
-  handleError(error: HttpErrorResponse) {
-    let msg = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      msg = error.error.message;
-    } else {
-      // server-side error
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(msg);
-  }
+
+  // getUserProfile(id: User): Observable<any> {
+  //   let api = `${this.endpoint}/users/${id}`;
+  //   return this.http.get(`${this.endpoint}/users/${id}`, { headers: this.headers }).pipe(
+  //     map((res) => {
+  //       return res || {};
+  //     }),
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  // handleError(error: HttpErrorResponse) {
+  //   let msg = '';
+  //   if (error.error instanceof ErrorEvent) {
+  //     // client-side error
+  //     msg = error.error.message;
+  //   } else {
+  //     // server-side error
+  //     msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
+  //   }
+  //   return throwError(msg);
+  // }
 
 }

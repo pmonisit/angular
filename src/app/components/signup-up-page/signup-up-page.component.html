@@ -9,12 +9,12 @@
             <form [formGroup]="signUpForm" (ngSubmit)="registerUser()" class="example-form">
                 <mat-form-field class="example-full-width" appearance="outline">
                   <mat-label>Email</mat-label>
-                  <input matInput formControlName="email">
+                  <input matInput formControlName="email" placeholder="It should be an email fomat">
                 </mat-form-field><br>
 
                 <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label>Enter your password</mat-label>
-                    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" placeholder="minimum 8 characters">
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
