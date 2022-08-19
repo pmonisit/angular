@@ -17,7 +17,7 @@ export class AuthService {
   constructor(private http: HttpClient, public router: Router) { }
 
   signUp(user: User): Observable<any> {
-    let api = `${this.endpoint}/register`;
+    let api = `https://json-server-seven-mock.herokuapp.com/register`;
     return this.http.post(api, user).pipe(
     tap(()=> {
       alert("Registered successfully. You may now login")
@@ -28,7 +28,7 @@ export class AuthService {
   
   signIn(user: User) {
     return this.http
-      .post(`${this.endpoint}/login`, user)
+      .post(`https://json-server-seven-mock.herokuapp.com/login`, user)
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res.accessToken);
         this.router.navigate(['/home']);
