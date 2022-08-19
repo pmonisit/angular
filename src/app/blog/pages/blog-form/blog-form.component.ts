@@ -17,9 +17,9 @@ export class BlogFormComponent implements OnInit, OnDestroy  {
   blogData: Blog[] = [];
   blogId: any;
   updatedBlog: Subscription | undefined;
-  private router: Router | undefined;
+
   
-  constructor(private fb: FormBuilder, private routes: ActivatedRoute, private blogService: BlogService) { 
+  constructor(private fb: FormBuilder, private routes: ActivatedRoute, private blogService: BlogService, private router: Router) { 
 
     this.routes.paramMap.subscribe( paramMap => {
       this.blogId = paramMap.get("id");
@@ -66,11 +66,16 @@ export class BlogFormComponent implements OnInit, OnDestroy  {
     console.log(this.blogForm?.value)
     let dt = this.blogForm.getRawValue() as Blog 
     if(this.blogId && dt.id !== null)
-       this.blogService.editBlog(dt).subscribe()
+       this.blogService.editBlog(dt).subscribe(()=>{
+        alert("Blog has been added updated");
+        this.router.navigate(['/blog']);
+       })
     else
-       this.blogService.createBlog(dt).subscribe() 
-
-    this.router?.navigate(['/blogs'])
+       this.blogService.createBlog(dt).subscribe(() => {
+        alert("New blog has been added");
+        this.router.navigate(['/blog']);
+       }) 
+        
   }
 
   ngOnDestroy(): void {

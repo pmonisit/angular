@@ -3,15 +3,14 @@ import { Injectable } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Book } from '../models/book';
-
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  
-   
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, public router: Router) { }
 
   createBook(book: Book){
     return this.http.post<Book>(`${environment.url}/books`,book).pipe(
@@ -27,13 +26,16 @@ export class BookService {
   updateBook(id: number){
     return this.http.get<Book[]>(`${environment.url}/books`).pipe(
       map((blog: Book[]) => {
-        return blog.filter( x => x.id === id)      
+        return blog.filter( x => 
+          x.id === id  
+          )      
       })
+      
     )
   }
 
   editBook(book: Book){
-    return this.http.put<Book>(`${environment.url}/books/${book.id}`, book).pipe(
+    return this.http.put<Book[]>(`${environment.url}/books/${book.id}`, book).pipe(
       tap(x => x)
     )
   }

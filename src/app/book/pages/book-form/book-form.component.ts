@@ -18,10 +18,10 @@ export class BookFormComponent implements OnInit {
   bookData: Book[] = [];
   bookId: any;
   updatedBook: Subscription | undefined;
-  private router: Router | undefined;
+  // private router: Router | undefined;
 
 
-  constructor(private fb: FormBuilder, private routes: ActivatedRoute, private bookService: BookService ) {
+  constructor(private fb: FormBuilder, private routes: ActivatedRoute, private bookService: BookService, private router: Router) {
       this.routes.paramMap.subscribe( paramMap => {
         this.bookId = paramMap.get('id');
       })
@@ -64,11 +64,16 @@ export class BookFormComponent implements OnInit {
     console.log(this.bookForm?.value)
     let dt = this.bookForm.getRawValue() as Book 
     if(this.bookId && dt.id !== null)
-       this.bookService.editBook(dt).subscribe()
+       this.bookService.editBook(dt).subscribe(()=> {
+        alert("Updated successfully")
+        this.router.navigate(['/book'])
+       })
+       
     else
-       this.bookService.createBook(dt).subscribe() 
-
-    this.router?.navigate(['/books'])
+       this.bookService.createBook(dt).subscribe(() => {
+        alert("New book has been added")
+        this.router.navigate(['/book'])
+       })  
   }
 
   ngOnDestroy(): void {
