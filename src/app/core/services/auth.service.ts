@@ -12,7 +12,7 @@ export class AuthService {
 
   // https://fake-auth-server-princeandwill.herokuapp.com/
   // http://localhost:3000
-  endpoint: string = 'https://fake-auth-server-princeandwill.herokuapp.com';
+  endpoint: string = 'http://localhost:3000';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
 
