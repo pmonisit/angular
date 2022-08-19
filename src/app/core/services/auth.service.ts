@@ -10,7 +10,9 @@ import { User } from 'src/app/user/models/user';
 })
 export class AuthService {
 
-  endpoint: string = 'http://localhost:3000';
+  // https://fake-auth-server-princeandwill.herokuapp.com/
+  // http://localhost:3000
+  endpoint: string = 'https://fake-auth-server-princeandwill.herokuapp.com';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
 
