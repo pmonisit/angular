@@ -12,7 +12,7 @@ export class AuthService {
 
   // https://fake-auth-server-princeandwill.herokuapp.com/
   // http://localhost:3000
-  endpoint: string = 'http://localhost:3000';
+  endpoint: string = 'https://json-server-seven-mock.herokuapp.com';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
 
@@ -30,7 +30,7 @@ export class AuthService {
   
   signIn(user: User) {
     return this.http
-      .post(`${this.endpoint}/signin`, user)
+      .post(`${this.endpoint}/login`, user)
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res.accessToken);
         this.router.navigate(['/home']);
